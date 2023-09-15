@@ -5,6 +5,7 @@ class contact{
   String name;
   String phone;
   String? docId;
+
   contact(
       {required this.email,
       required this.HomeAdd,
@@ -18,7 +19,7 @@ class contact{
       'HomeAdd': this.HomeAdd,
       'imagepath': this.imagepath,
       'name': this.name,
-      'phoneNo': this.phone,
+      'phoneNo': this.phone
     };
   }
 

@@ -28,11 +28,11 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+
   url_launcher: ^6.1.12
   cloud_firestore: ^4.8.2
   image_picker: ^1.0.1
   lottie: ^2.5.0
-
   flutter_form_builder: ^9.1.0
   firebase_auth: ^4.6.3
   fluttertoast: ^8.2.2

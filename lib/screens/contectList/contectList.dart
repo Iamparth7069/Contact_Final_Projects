@@ -24,22 +24,17 @@ class _contectListState extends State<contectList> {
   CollectionReference Addcontect =
       FirebaseFirestore.instance.collection('AddContecs');
   bool isLoading = true;
-
-  // int countData =Addcontect.count() as int;
   User? UserID = FirebaseAuth.instance.currentUser;
-
-  // int count = countThedata() as int;
-
   FirebaseServices _services = FirebaseServices();
-  List<String> getDocumentid = [];
-  List<contact> contactList = [];
 
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    DataGet();
   }
+
 
   @override
   Widget build(BuildContext contexts) {
@@ -140,7 +135,7 @@ class _contectListState extends State<contectList> {
             child: Text('Error fetching data'),
           );
         }
-        else if(snapshot.data!.docs == null) {
+        else if(snapshot.data!.docs.isEmpty) {
           return  Container(
             child: Text("Thare No Data"),
           );
@@ -326,6 +321,20 @@ class _contectListState extends State<contectList> {
         }
       },
     );
+  }
+
+  Future<List<contact>> DataGet() async {
+    // Future<List<Item>> getItemsWithConditionFromFirebase(int minQuantity) async {
+    //   List<Item> items = [];
+    List<contact> items = [];
+    QuerySnapshot<Map<String, dynamic>> snapshot = await  FirebaseFirestore.instance
+        .collection("AddContecs")
+        .where("id", isEqualTo: UserID?.uid)
+        .get();
+    snapshot.docs.forEach((element) {
+      items.add(contact(email: element["email"], HomeAdd: element["HomeAdd"], imagepath: element["imagepath"], name: element["name"], phone: element["phoneNo"],docId: element.id));
+    });
+    return items;
   }
 }
 
